@@ -139,7 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\AnimatedTexture.cpp" />
+    <ClCompile Include="src\components\Application.cpp" />
+    <ClCompile Include="src\components\DancinWindow.cpp" />
     <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\components\AnimatedTexture.h" />
+    <ClInclude Include="src\components\Application.h" />
+    <ClInclude Include="src\components\DancinWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
