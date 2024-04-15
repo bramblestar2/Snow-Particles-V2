@@ -10,6 +10,7 @@ Application::Application()
 
 	m_framerate = 20;
 
+	m_window.setShake(true);
 	m_window.setSpeed(0.5);
 
 	m_protogenGif.setStartFrame(1);

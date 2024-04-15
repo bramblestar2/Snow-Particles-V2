@@ -12,11 +12,13 @@ public:
 	void setSpeed(const double& speed);
 	void setOffset(const double& x, const double& y);
 	void setDistance(const double& distance);
+	void setShake(const bool& shake);
 
 	const double& getSpeed() const;
 
 	void next();
 private:
+	bool m_shake;
 	double m_distance;
 	double m_speed;
 	sf::Vector2f m_offset;
