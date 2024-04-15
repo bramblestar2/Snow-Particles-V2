@@ -11,6 +11,7 @@ class AnimatedTexture
 {
 public:
 	AnimatedTexture(const std::string& path = "", const std::string& mask = "frame (#)", const bool& fillMask = true);
+	~AnimatedTexture();
 
 	void setPath(const std::string& path);
 	void setMaskedString(const std::string& mask);

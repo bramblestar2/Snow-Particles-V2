@@ -108,7 +108,9 @@ void Snow::update(const double& dt)
 
 	for (int i = 0; i < m_particles.size(); i++)
 	{
-		m_particles.at(i).move(0, dt*m_speed);
+		double xVel = (cos((m_particles.at(i).getPosition().y + (i*2)) / 100) * dt) * m_speed;
+		double yVel = dt * m_speed;
+		m_particles.at(i).move(xVel, yVel);
 	}
 }
 

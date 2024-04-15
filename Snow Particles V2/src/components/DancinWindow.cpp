@@ -42,6 +42,11 @@ void DancinWindow::setShake(const bool& shake)
 	m_shake = shake;
 }
 
+void DancinWindow::setWindowMoving(const bool& moving)
+{
+	m_windowMoving = moving;
+}
+
 
 const double& DancinWindow::getSpeed() const
 {
@@ -63,10 +68,22 @@ void DancinWindow::next()
 	double windowCenterX = windowX / 2;
 	double windowCenterY = windowY / 2;
 
-	double scale = (2 / (3 - cos(2 * seconds))) * 400;
+	double scale = 0;
+	double newX = 0;
+	double newY = 0;
 
-	double newX = centerX + (cos(seconds) * scale) - windowCenterX;
-	double newY = centerY + ((sin(2*seconds) * scale)/2) - windowCenterY;
+	if (m_windowMoving)
+	{
+		scale = (2 / (3 - cos(2 * seconds))) * 400;
+
+		newX = centerX + (cos(seconds) * scale) - windowCenterX;
+		newY = centerY + ((sin(2 * seconds) * scale) / 2) - windowCenterY;
+	}
+	else
+	{
+		newX = centerX - windowCenterX;
+		newY = centerY - windowCenterY;
+	}
 
 	double offsetX = 0;
 	double offsetY = 0;

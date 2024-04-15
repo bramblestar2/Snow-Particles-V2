@@ -9,6 +9,14 @@ AnimatedTexture::AnimatedTexture(const std::string& path, const std::string& mas
 }
 
 
+AnimatedTexture::~AnimatedTexture()
+{
+	for (int i = 0; i < m_frames.size(); i++)
+		m_frames.at(i).reset();
+	m_frames.clear();
+}
+
+
 void AnimatedTexture::setPath(const std::string& path)
 {
 	m_path = path;

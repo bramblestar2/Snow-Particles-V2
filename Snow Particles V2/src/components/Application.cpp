@@ -2,7 +2,7 @@
 
 Application::Application()
 	: m_protogenGif("assets/protogen", "frame (##).png", false),
-	  m_window(sf::VideoMode(500, 500), "Hello World", sf::Style::None)
+	m_window(sf::VideoMode(500, 500), "Hello World", sf::Style::None)
 {
 	HWND hWnd = m_window.getSystemHandle();
 	SetWindowLongPtr(hWnd, GWL_EXSTYLE, GetWindowLongPtr(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
@@ -12,6 +12,7 @@ Application::Application()
 
 	m_window.setShake(true);
 	m_window.setSpeed(0.5);
+	m_window.setWindowMoving(true);
 
 	m_protogenGif.setStartFrame(1);
 	m_protogenGif.setFramerate(m_framerate);
@@ -80,7 +81,7 @@ void Application::update()
 
 void Application::render()
 {
-	m_window.clear(sf::Color::Transparent);
+	m_window.clear(sf::Color(0,0,0,0));
 
 	m_protogen.setTexture(m_protogenGif.getTexture());
 	m_window.draw(m_protogen);
