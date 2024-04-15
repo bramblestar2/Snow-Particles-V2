@@ -6,7 +6,7 @@
 
 int main()
 {
-	Application app;
+	Application app("assets/song1.ogg");
 
 	app.run();
 

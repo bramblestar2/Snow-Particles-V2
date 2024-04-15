@@ -10,7 +10,7 @@
 class Application
 {
 public:
-	Application();
+	Application(const std::string& audioPath = "assets/song.ogg");
 
 	void updateEvents();
 	void updateDT();
@@ -20,6 +20,7 @@ public:
 	void run();
 
 private:
+	void initialize(const std::string& audioPath);
 	void shutdown();
 
 	DancinWindow m_window;

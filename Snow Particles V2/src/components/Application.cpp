@@ -1,37 +1,10 @@
 #include "Application.h"
 
-Application::Application()
+Application::Application(const std::string& audioPath)
 	: m_protogenGif("assets/protogen", "frame (##).png", false),
 	m_window(sf::VideoMode(500, 500), "Hello World", sf::Style::None)
 {
-	HWND hWnd = m_window.getSystemHandle();
-	SetWindowLongPtr(hWnd, GWL_EXSTYLE, GetWindowLongPtr(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
-	SetLayeredWindowAttributes(m_window.getSystemHandle(), 0, 0, LWA_COLORKEY);
-
-	m_framerate = 20;
-
-	m_window.setShake(true);
-	m_window.setSpeed(0.5);
-	m_window.setWindowMoving(true);
-
-	m_protogenGif.setStartFrame(1);
-	m_protogenGif.setFramerate(m_framerate);
-	m_protogenGif.load();
-
-	m_musicBuffer.loadFromFile("assets/song.ogg");
-
-	m_music.setBuffer(m_musicBuffer);
-	m_music.setLoop(true);
-	m_music.play();
-	sf::Vector2f protoSize(250,250);
-	m_protogen.setSize(protoSize);
-	m_protogen.setOrigin(protoSize.x / 2, protoSize.y / 2);
-	m_protogen.setPosition(m_window.getSize().x / 2, m_window.getSize().y / 2);
-
-	m_snow.setSpawnWidth(m_window.getSize().x);
-	m_snow.setSpeed(50);
-	m_snow.setFrequency(0.3);
-	m_snow.setMaxDepth(m_window.getSize().y + 50);
+	initialize(audioPath);
 }
 
 
@@ -104,6 +77,38 @@ void Application::run()
 	}
 }
 
+
+void Application::initialize(const std::string& audioPath)
+{
+	HWND hWnd = m_window.getSystemHandle();
+	SetWindowLongPtr(hWnd, GWL_EXSTYLE, GetWindowLongPtr(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
+	SetLayeredWindowAttributes(m_window.getSystemHandle(), 0, 0, LWA_COLORKEY);
+
+	m_framerate = 20;
+
+	m_window.setShake(true);
+	m_window.setSpeed(0.5);
+	m_window.setWindowMoving(true);
+
+	m_protogenGif.setStartFrame(1);
+	m_protogenGif.setFramerate(m_framerate);
+	m_protogenGif.load();
+
+	m_musicBuffer.loadFromFile(audioPath);
+
+	m_music.setBuffer(m_musicBuffer);
+	m_music.setLoop(true);
+	m_music.play();
+	sf::Vector2f protoSize(250, 250);
+	m_protogen.setSize(protoSize);
+	m_protogen.setOrigin(protoSize.x / 2, protoSize.y / 2);
+	m_protogen.setPosition(m_window.getSize().x / 2, m_window.getSize().y / 2);
+
+	m_snow.setSpawnWidth(m_window.getSize().x);
+	m_snow.setSpeed(50);
+	m_snow.setFrequency(0.3);
+	m_snow.setMaxDepth(m_window.getSize().y + 50);
+}
 
 void Application::shutdown()
 {
