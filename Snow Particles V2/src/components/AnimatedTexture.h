@@ -25,20 +25,17 @@ public:
 
 	void load();
 
-	void update();
+	void update(const double& dt = 1);
 
 private:
 
 	std::string frameStr(const int& frame, const bool& fill = true) const;
-	void updateDT();
 
 	bool m_fillMask;
 	int m_startFrame;
-	double m_dt;
 	double m_frame;
 	double m_framerate;
 	std::vector<std::unique_ptr<sf::Texture>> m_frames;
 	std::string m_path;
 	std::string m_maskedString;
-	sf::Clock m_dtClock;
 };

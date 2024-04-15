@@ -11,12 +11,14 @@ public:
 
 	void setSpeed(const double& speed);
 	void setOffset(const double& x, const double& y);
+	void setDistance(const double& distance);
 
 	const double& getSpeed() const;
 
 	void next();
 private:
+	double m_distance;
+	double m_speed;
 	sf::Vector2f m_offset;
 	sf::Clock m_clock;
-	double m_speed;
 };

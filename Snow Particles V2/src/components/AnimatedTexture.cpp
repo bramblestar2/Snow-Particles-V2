@@ -82,11 +82,9 @@ void AnimatedTexture::load()
 }
 
 
-void AnimatedTexture::update()
+void AnimatedTexture::update(const double& dt)
 {
-	updateDT();
-
-	m_frame = std::fmod(m_frame + (m_dt * m_framerate), m_frames.size());
+	m_frame = std::fmod(m_frame + (dt * m_framerate), m_frames.size());
 }
 
 
@@ -109,10 +107,4 @@ std::string AnimatedTexture::frameStr(const int& frame, const bool& fill) const
 	filledFrame = std::regex_replace(str, reg, filledFrame);
 
 	return filledFrame;
-}
-
-
-void AnimatedTexture::updateDT()
-{
-	m_dt = m_dtClock.restart().asSeconds();
 }

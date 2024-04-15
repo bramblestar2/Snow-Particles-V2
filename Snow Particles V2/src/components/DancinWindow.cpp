@@ -31,6 +31,12 @@ void DancinWindow::setOffset(const double& x, const double& y)
 }
 
 
+void DancinWindow::setDistance(const double& distance)
+{
+	m_distance = distance;
+}
+
+
 const double& DancinWindow::getSpeed() const
 {
 	return m_speed;
@@ -56,8 +62,11 @@ void DancinWindow::next()
 	double newX = centerX + (cos(seconds) * scale) - windowCenterX;
 	double newY = centerY + ((sin(2*seconds) * scale)/2) - windowCenterY;
 
-	double lerpX = std::lerp(this->getPosition().x, newX + m_offset.x, 0.5f);
-	double lerpY = std::lerp(this->getPosition().y, newY + m_offset.y, 0.5f);
+	double offsetX = cos(m_offset.x) * m_distance;
+	double offsetY = sin(m_offset.y) * m_distance;
+
+	double lerpX = std::lerp(this->getPosition().x, newX + offsetX, 0.5f);
+	double lerpY = std::lerp(this->getPosition().y, newY + offsetY, 0.5f);
 
 	this->setPosition(sf::Vector2i(lerpX, lerpY));
 }
