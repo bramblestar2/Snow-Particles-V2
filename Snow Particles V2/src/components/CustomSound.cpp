@@ -3,19 +3,18 @@
 
 const std::pair<int, int>& CustomSound::getCurrentSample()
 {
-    unsigned int sampleFrequency{ this->getBuffer()->getSampleRate() };
-    unsigned int numberOfChannels{ this->getBuffer()->getChannelCount()};
-    const sf::Int16* sampleData{ this->getBuffer()->getSamples()};
-    sf::Time currentPlayingTime{ this->getPlayingOffset() };
-    unsigned int currentSamplePosition = currentPlayingTime.asSeconds() * sampleFrequency ;
-    unsigned int currentSampleDataIndex{ currentSamplePosition * numberOfChannels };
-    sf::Int16 leftChannel{ sampleData[currentSampleDataIndex] };
-    sf::Int16 rightChannel{ sampleData[currentSampleDataIndex + 1] };
+    this->getBuffer()->getChannelCount();
+    this->getBuffer()->getSamples();
+    this->getBuffer()->getSampleRate();
+    std::pair<int, int> samples = SoundReader::getPlayedSample(this->getBuffer()->getSamples(), 
+                                                               this->getBuffer()->getSampleRate(), 
+                                                               this->getBuffer()->getChannelCount(), 
+                                                               this->getPlayingOffset());
 
-    m_lastSample.first = leftChannel;
-    m_lastSample.second = rightChannel;
+    m_lastSample.first = samples.first;
+    m_lastSample.second = samples.second;
 
-    return {leftChannel, rightChannel};
+    return samples;
 }
 
 const std::pair<int, int>& CustomSound::getPreviousSample() const

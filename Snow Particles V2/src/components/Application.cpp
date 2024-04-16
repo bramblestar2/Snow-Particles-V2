@@ -37,17 +37,28 @@ void Application::update()
 {
 	double uptime = m_uptime.getElapsedTime().asSeconds() * 2;
 
-	double prevSample = ((m_music.getPreviousSample().first + m_music.getPreviousSample().second) / 2) / 1000;
-	double sample = ((m_music.getCurrentSample().first + m_music.getCurrentSample().second) / 2) / 1000;
+	std::pair<int, int> samples = SoundReader::getPlayedSample(m_bufferManip.smoothBuffer(),
+															   m_musicBuffer.getSampleRate(),
+															   m_musicBuffer.getChannelCount(),
+															   m_music.getPlayingOffset());
 
-	m_window.setDistance(std::lerp(prevSample, sample, 0.5f));
+	int combined = (samples.first + samples.second) / 2;
+
+	m_prevSample = m_curSample;
+	m_curSample = combined / 1000;
+
+	double distance = 0;
+	if (abs(combined) > 12000 && abs(combined) < 20000)
+		distance = std::lerp(m_prevSample, m_curSample, 0.5f);
+
+	m_window.setDistance(distance);
 	m_window.setOffset(cos(uptime), sin(uptime));
 	m_window.next();
 
-	m_protogenGif.setFramerate(abs(sample/20.0f)*50);
+	m_protogenGif.setFramerate(abs(m_curSample / 20.0f) * 50);
 	m_protogenGif.update(m_dt);
 
-	m_snow.setSpeed(abs(sample / 20.0f)*500);
+	m_snow.setSpeed(abs(m_curSample / 20.0f) * 500);
 	m_snow.update(m_dt);
 }
 
@@ -98,7 +109,6 @@ void Application::initialize(const std::string& audioPath)
 
 	m_music.setBuffer(m_musicBuffer);
 	m_music.setLoop(true);
-	m_music.play();
 	sf::Vector2f protoSize(250, 250);
 	m_protogen.setSize(protoSize);
 	m_protogen.setOrigin(protoSize.x / 2, protoSize.y / 2);
@@ -108,6 +118,11 @@ void Application::initialize(const std::string& audioPath)
 	m_snow.setSpeed(50);
 	m_snow.setFrequency(0.3);
 	m_snow.setMaxDepth(m_window.getSize().y + 50);
+
+	m_bufferManip.setBuffer(&m_musicBuffer);
+	const sf::Int16* buffer = m_bufferManip.smoothBuffer(20);
+
+	m_music.play();
 }
 
 void Application::shutdown()

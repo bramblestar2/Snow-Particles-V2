@@ -144,6 +144,8 @@
     <ClCompile Include="src\components\CustomSound.cpp" />
     <ClCompile Include="src\components\DancinWindow.cpp" />
     <ClCompile Include="src\components\Snow.cpp" />
+    <ClCompile Include="src\components\SoundBufferManipulator.cpp" />
+    <ClCompile Include="src\components\SoundReader.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +154,8 @@
     <ClInclude Include="src\components\CustomSound.h" />
     <ClInclude Include="src\components\DancinWindow.h" />
     <ClInclude Include="src\components\Snow.h" />
+    <ClInclude Include="src\components\SoundBufferManipulator.hpp" />
+    <ClInclude Include="src\components\SoundReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <SFML/Audio.hpp>
+#include "SoundReader.h"
 
 class CustomSound : public sf::Sound
 {

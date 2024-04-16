@@ -5,7 +5,9 @@
 #include "DancinWindow.h"
 #include "AnimatedTexture.h"
 #include "Snow.h"
+#include "SoundBufferManipulator.hpp"
 #include "CustomSound.h"
+#include "SoundReader.h"
 
 class Application
 {
@@ -38,4 +40,8 @@ private:
 
 	CustomSound m_music;
 	sf::SoundBuffer m_musicBuffer;
+	SoundBufferManipulator m_bufferManip;
+
+	sf::Int16 m_prevSample = 0;
+	sf::Int16 m_curSample = 0;
 };
